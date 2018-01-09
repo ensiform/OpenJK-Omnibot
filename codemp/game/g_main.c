@@ -28,6 +28,9 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "g_nav.h"
 #include "bg_saga.h"
 #include "b_local.h"
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
 
 level_locals_t	level;
 
@@ -174,6 +177,10 @@ void G_InitGame( int levelTime, int randomSeed, int restart ) {
 	vmCvar_t	mapname;
 	vmCvar_t	ckSum;
 	char serverinfo[MAX_INFO_STRING] = {0};
+
+	// omnibot
+	Bot_Interface_InitHandles();
+	// end omnibot
 
 	//Init RMG to 0, it will be autoset to 1 if there is terrain on the level.
 	trap->Cvar_Set("RMG", "0");
@@ -423,6 +430,11 @@ void G_InitGame( int levelTime, int randomSeed, int restart ) {
 			SP_info_jedimaster_start( ent );
 		}
 	}
+
+	// omnibot
+	if ( !Bot_Interface_Init() )
+		G_Printf( S_COLOR_RED "Unable to Initialize Omni-Bot.\n" );
+	// end omnibot
 }
 
 
@@ -437,6 +449,11 @@ void G_ShutdownGame( int restart ) {
 	gentity_t *ent;
 
 //	trap->Print ("==== ShutdownGame ====\n");
+
+	// omnibot
+	if (!Bot_Interface_Shutdown())
+		G_Printf(S_COLOR_RED "Error shutting down Omni-Bot.\n");
+	// end omnibot
 
 	G_CleanAllFakeClients(); //get rid of dynamically allocated fake client structs.
 
@@ -1617,6 +1634,10 @@ void LogExit( const char *string ) {
 		trap->SendConsoleCommand( EXEC_APPEND, (won) ? "spWin\n" : "spLose\n" );
 	}
 	*/
+
+	// omnibot
+	Bot_Util_SendTrigger( NULL, NULL, "Round End.", "roundend" );
+	// end omnibot
 }
 
 qboolean gDidDuelStuff = qfalse; //gets reset on game reinit
@@ -3002,6 +3023,9 @@ void G_RunFrame( int levelTime ) {
 
 	// if we are waiting for the level to restart, do nothing
 	if ( level.restarted ) {
+		// omnibot
+		Bot_Interface_Update();
+		// end omnibot
 		return;
 	}
 
@@ -3434,6 +3458,11 @@ void G_RunFrame( int levelTime ) {
 #endif
 
 	g_LastFrameTime = level.time;
+
+	// omnibot
+	Bot_Interface_Update();
+	// end omnibot
+
 }
 
 const char *G_GetStringEdString(char *refSection, char *refName)
@@ -3667,7 +3696,10 @@ Q_EXPORT intptr_t vmMain( int command, intptr_t arg0, intptr_t arg1, intptr_t ar
 		return ConsoleCommand();
 
 	case BOTAI_START_FRAME:
-		return BotAIStartFrame( arg0 );
+		// omnibot
+		return 0;
+		//return BotAIStartFrame( arg0 );
+		// end omnibot
 
 	case GAME_ROFF_NOTETRACK_CALLBACK:
 		_G_ROFF_NotetrackCallback( arg0, (const char *)arg1 );

@@ -1378,6 +1378,18 @@ void R_DebugGraphics( void ) {
 }
 
 
+void R_RenderOmnibot() {
+	if ( !ri.Sys_OmnibotRender ) {
+		return;
+	}
+
+	renderOmnibot_t *cmd = (renderOmnibot_t *)R_GetCommandBuffer( sizeof( *cmd ) );
+	if ( cmd != NULL ) {
+		cmd->commandId = RC_DRAW_OMNIBOT;
+	}
+}
+
+
 /*
 ================
 R_RenderView

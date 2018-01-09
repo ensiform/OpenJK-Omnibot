@@ -2477,6 +2477,8 @@ void CL_InitRef( void ) {
 	ri.PD_Store = PD_Store;
 	ri.PD_Load = PD_Load;
 
+	ri.Sys_OmnibotRender = Sys_OmnibotRender;
+
 	ret = GetRefAPI( REF_API_VERSION, &ri );
 
 //	Com_Printf( "-------------------------------\n");

@@ -24,6 +24,9 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "g_local.h"
 #include "w_saber.h"
 #include "qcommon/q_shared.h"
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
 
 #define	MISSILE_PRESTEP_TIME	50
 

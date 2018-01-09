@@ -1057,4 +1057,8 @@ const void *PD_Load ( const char *name, size_t *size );
 
 uint32_t ConvertUTF8ToUTF32( char *utf8CurrentChar, char **utf8NextChar );
 
+typedef struct renderOmnibot_s {
+	int commandId;
+} renderOmnibot_t;
+
 #include "sys/sys_public.h"

@@ -3228,6 +3228,10 @@ void SV_UnbindGame( void ) {
 }
 
 void SV_RestartGame( void ) {
+#ifndef DEDICATED
+	Sys_OmnibotUnLoad();
+#endif
+
 	GVM_ShutdownGame( qtrue );
 
 	gvm = VM_Restart( gvm );

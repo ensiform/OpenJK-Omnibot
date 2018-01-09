@@ -115,6 +115,11 @@ void SV_ShutdownGameProgs( void ) {
 	if ( !svs.gameStarted ) {
 		return;
 	}
+
+#ifndef DEDICATED
+	Sys_OmnibotUnLoad();
+#endif
+
 	SV_UnbindGame();
 }
 
@@ -137,6 +142,11 @@ void SV_InitGameProgs( void ) {
 	SV_BindGame();
 
 	SV_InitGame( qfalse );
+
+#ifndef DEDICATED
+	// unload the refs during a map change
+	Sys_OmnibotLoad();
+#endif
 }
 
 

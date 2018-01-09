@@ -24,6 +24,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "g_local.h"
 #include "bg_saga.h"
 
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
+
 typedef struct teamgame_s {
 	float			last_flag_capture;
 	int				last_capture_team;
@@ -533,6 +537,10 @@ void Team_CheckHurtCarrier(gentity_t *targ, gentity_t *attacker)
 }
 
 
+// omnibot
+const char *_GetEntityName( gentity_t *_ent );
+void Bot_Util_SendTrigger( gentity_t *_ent, gentity_t *_activator, const char *_tagname, const char *_action );
+// end omnibot
 gentity_t *Team_ResetFlag( int team ) {
 	char *c;
 	gentity_t *ent, *rent = NULL;

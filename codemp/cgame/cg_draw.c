@@ -8453,7 +8453,9 @@ void CG_DrawActive( stereoFrame_t stereoView ) {
 	CG_DrawMiscStaticModels();
 
 	// draw 3D view
+	cg.refdef.rdflags |= RDF_RENDEROMNIBOT; // cvar this flag?
 	trap->R_RenderScene( &cg.refdef );
+	cg.refdef.rdflags &= ~RDF_RENDEROMNIBOT; // cvar this flag?
 
 	// restore original viewpoint if running stereo
 	if ( separation != 0 ) {

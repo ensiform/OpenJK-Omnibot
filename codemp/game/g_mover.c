@@ -24,6 +24,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 #include "g_local.h"
 
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
+
 
 /*
 ===============================================================================
@@ -597,6 +601,13 @@ void SetMoverState( gentity_t *ent, moverState_t moverState, int time ) {
 		{
 			ent->s.pos.trType = TR_NONLINEAR_STOP;
 		}
+		// omnibot
+		{
+			const char *pName = _GetEntityName( ent );
+			if ( Q_stricmp( pName, "" ) )
+				Bot_Util_SendTrigger( ent, NULL, va( "%s_Moving", pName ), "opening" );
+		}
+		// end omnibot
 		//ent->s.eFlags &= ~EF_BLOCKED_MOVER;
 		break;
 	case MOVER_2TO1:
@@ -612,6 +623,13 @@ void SetMoverState( gentity_t *ent, moverState_t moverState, int time ) {
 		{
 			ent->s.pos.trType = TR_NONLINEAR_STOP;
 		}
+		// omnibot
+		{
+			const char *pName = _GetEntityName( ent );
+			if ( Q_stricmp( pName, "" ) )
+				Bot_Util_SendTrigger( ent, NULL, va( "%s_Moving", pName ), "closing" );
+		}
+		// end omnibot
 		//ent->s.eFlags &= ~EF_BLOCKED_MOVER;
 		break;
 	}
@@ -914,6 +932,12 @@ void Use_BinaryMover( gentity_t *ent, gentity_t *other, gentity_t *activator )
 		UnLockDoors(ent);
 		return;
 	}
+
+	// omnibot
+	if ( ent->target ) {
+		Bot_Util_SendTrigger( ent, NULL, va( "%s activated", ent->target ), "pushed" );
+	}
+	// end omnibot
 
 	G_ActivateBehavior(ent,BSET_USE);
 

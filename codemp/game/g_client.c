@@ -25,6 +25,9 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "g_local.h"
 #include "ghoul2/G2.h"
 #include "bg_saga.h"
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
 
 // g_client.c -- client functions that don't happen every frame
 
@@ -2542,6 +2545,10 @@ char *ClientConnect( int clientNum, qboolean firstTime, qboolean isBot ) {
 		}
 	}
 
+	// omnibot
+	Bot_Event_ClientConnected( ent, isBot );
+	// end omnibot
+
 	// get and distribute relevent paramters
 	if ( !ClientUserinfoChanged( clientNum ) )
 		return "Failed userinfo validation";
@@ -3908,6 +3915,10 @@ void ClientDisconnect( int clientNum ) {
 	if ( !ent->client || ent->client->pers.connected == CON_DISCONNECTED ) {
 		return;
 	}
+
+	// omnibot
+	Bot_Event_ClientDisConnected( ent );
+	// end omnibot
 
 	i = 0;
 

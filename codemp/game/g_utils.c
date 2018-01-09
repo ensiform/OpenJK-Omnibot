@@ -27,6 +27,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "bg_saga.h"
 #include "qcommon/q_shared.h"
 
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
+
 typedef struct shaderRemap_s {
   char oldShader[MAX_QPATH];
   char newShader[MAX_QPATH];

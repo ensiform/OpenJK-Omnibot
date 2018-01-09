@@ -86,6 +86,8 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #define	RDF_NOFOG			64		//no global fog in this scene (but still brush fog) -rww
 #define RDF_ForceSightOn	128		//using force sight
 
+#define RDF_RENDEROMNIBOT	(1<<31)
+
 extern int	skyboxportal;
 extern int	drawskyboxportal;
 

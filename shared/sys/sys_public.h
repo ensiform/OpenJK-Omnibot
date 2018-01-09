@@ -154,6 +154,10 @@ qboolean Sys_LowPhysicalMemory();
 
 void Sys_SetProcessorAffinity( void );
 
+void	Sys_OmnibotLoad();
+void	Sys_OmnibotUnLoad();
+const void * Sys_OmnibotRender( const void *data );
+
 typedef enum graphicsApi_e
 {
 	GRAPHICS_API_GENERIC,

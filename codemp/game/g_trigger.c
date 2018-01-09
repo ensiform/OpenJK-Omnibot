@@ -24,6 +24,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "g_local.h"
 #include "bg_saga.h"
 
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
+
 int gTrigFallSound;
 
 void InitTrigger( gentity_t *self ) {

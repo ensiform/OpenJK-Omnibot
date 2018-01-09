@@ -25,6 +25,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "ai_main.h"
 #include "ghoul2/G2.h"
 
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
+
 #define METROID_JUMP 1
 
 //NEEDED FOR MIND-TRICK on NPCS=========================================================

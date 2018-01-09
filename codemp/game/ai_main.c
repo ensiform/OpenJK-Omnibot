@@ -7530,6 +7530,10 @@ int BotAIStartFrame(int time) {
 //	static int botlib_residual;
 	static int lastbotthink_time;
 
+	// omnibot
+	return 0;
+	// end omnibot
+
 	if (gUpdateVars < level.time)
 	{
 		trap->Cvar_Update(&bot_pvstype);

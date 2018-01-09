@@ -25,6 +25,9 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 #include "b_local.h"
 #include "bg_saga.h"
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
 
 extern int G_ShipSurfaceForSurfName( const char *surfaceName );
 extern qboolean G_FlyVehicleDestroySurface( gentity_t *veh, int surface );
@@ -766,7 +769,7 @@ void body_die( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, int d
 
 
 // these are just for logging, the client prints its own messages
-char	*modNames[MOD_MAX] = {
+const char *modNames[] = {
 	"MOD_UNKNOWN",
 	"MOD_STUN_BATON",
 	"MOD_MELEE",
@@ -808,8 +811,10 @@ char	*modNames[MOD_MAX] = {
 	"MOD_FALLING",
 	"MOD_SUICIDE",
 	"MOD_TARGET_LASER",
-	"MOD_TRIGGER_HURT"
+	"MOD_TRIGGER_HURT",
+	"MOD_TEAM_CHANGE"
 };
+static const size_t numModNames = ARRAY_LEN( modNames );
 
 
 /*
@@ -2463,7 +2468,7 @@ extern void RunEmplacedWeapon( gentity_t *ent, usercmd_t **ucmd );
 		killerName = "<world>";
 	}
 
-	if ( meansOfDeath < 0 || meansOfDeath >= sizeof( modNames ) / sizeof( modNames[0] ) ) {
+	if ( meansOfDeath < 0 || meansOfDeath >= numModNames ) {
 		obit = "<bad obituary>";
 	} else {
 		obit = modNames[ meansOfDeath ];
@@ -2480,6 +2485,12 @@ extern void RunEmplacedWeapon( gentity_t *ent, usercmd_t **ucmd );
 	}
 	else
 		Q_strcat( buf, sizeof( buf ), va( "%s by %s\n", self->client->pers.netname, obit ) );
+
+	// omnibot
+	Bot_Event_Death( self, attacker, obit );
+	Bot_Event_KilledSomeone( attacker, self, obit );
+	// end omnibot
+
 	G_LogPrintf( "%s", buf );
 
 	if ( g_austrian.integer
@@ -2683,6 +2694,10 @@ extern void RunEmplacedWeapon( gentity_t *ent, usercmd_t **ucmd );
 		if (self->s.eType != ET_NPC)
 		{
 			TossClientItems( self );
+
+			// omnibot
+			//TODO Bot_Util_SendTrigger( flag, NULL, va( "%s dropped.", flag->message ), "dropped" );
+			// end omnibot
 		}
 	}
 	else {
@@ -5556,6 +5571,16 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker, vec3_
 		}
 
 		G_LogWeaponDamage(attacker->s.number, mod, take);
+
+		if ( targ->s.number < level.maxclients ) {
+			// omnibot
+			const char * damageType = NULL;
+			if ( mod >= 0 && mod < numModNames )
+				damageType = modNames[mod];
+			Bot_Event_TakeDamage( targ, attacker, damageType, take );
+			// end omnibot
+		}
+
 	}
 
 }

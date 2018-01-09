@@ -26,6 +26,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 #include "g_local.h"
 
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
+
 /*
 ==============================================================================
 
@@ -479,8 +483,9 @@ int svcmdcmp( const void *a, const void *b ) {
 }
 
 svcmd_t svcmds[] = {
-	{ "addbot",						Svcmd_AddBot_f,						qfalse },
+	//{ "addbot",						Svcmd_AddBot_f,						qfalse },
 	{ "addip",						Svcmd_AddIP_f,						qfalse },
+	{ "bot",						Bot_Interface_ConsoleCommand,		qfalse },
 	{ "botlist",					Svcmd_BotList_f,					qfalse },
 	{ "entitylist",					Svcmd_EntityList_f,					qfalse },
 	{ "forceteam",					Svcmd_ForceTeam_f,					qfalse },

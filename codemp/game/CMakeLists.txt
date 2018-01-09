@@ -21,10 +21,17 @@ if(NOT InOpenJK)
 	message(FATAL_ERROR "Use the top-level cmake script!")
 endif(NOT InOpenJK)
 
+set(OBDir "${CMAKE_SOURCE_DIR}/../omni-bot")
+set(OBCommonDir "${OBDir}/Omnibot/Common")
+set(OBJADir "${OBDir}/Omnibot/JA")
+
+
 set(MPGameIncludeDirectories
 	"${MPDir}"
 	"${SharedDir}"
 	"${GSLIncludeDirectory}"
+	"${OBCommonDir}"
+	"${OBJADir}"
 	)
 if(WIN32)
 	set(MPGameLibraries "winmm")
@@ -55,6 +62,8 @@ set(MPGameGameFiles
 	"${MPDir}/game/g_exphysics.c"
 	"${MPDir}/game/g_ICARUScb.c"
 	"${MPDir}/game/g_items.c"
+	"${MPDir}/game/g_jabot_interface.cpp"
+	"${OBCommonDir}/BotLoadLibrary.cpp"
 	"${MPDir}/game/g_log.c"
 	"${MPDir}/game/g_main.c"
 	"${MPDir}/game/g_mem.c"
@@ -128,6 +137,7 @@ set(MPGameGameFiles
 	"${MPDir}/game/bg_weapons.h"
 	"${MPDir}/game/chars.h"
 	"${MPDir}/game/g_ICARUScb.h"
+	"${MPDir}/game/g_jabot_interface.h"
 	"${MPDir}/game/g_local.h"
 	"${MPDir}/game/g_nav.h"
 	"${MPDir}/game/g_public.h"

@@ -25,6 +25,10 @@ along with this program; if not, see <http://www.gnu.org/licenses/>.
 #include "g_local.h"
 #include "bg_saga.h"
 
+// omnibot
+#include "g_jabot_interface.h"
+// end omnibot
+
 #include "ui/menudef.h"			// for the voice chats
 
 //rww - for getting bot commands...
@@ -1566,6 +1570,10 @@ static void G_SayTo( gentity_t *ent, gentity_t *other, int mode, int color, cons
 			mode == SAY_TEAM ? "tchat" : "chat",
 			name, Q_COLOR_ESCAPE, color, message, ent->s.number));
 	}
+
+	// omnibot
+	Bot_Event_ChatMessage( other, ent, mode, message );
+	// end omnibot
 }
 
 void G_Say( gentity_t *ent, gentity_t *target, int mode, const char *chatText ) {
@@ -1780,6 +1788,10 @@ static void Cmd_VoiceCommand_f(gentity_t *ent)
 	{ //didn't find it in the list
 		return;
 	}
+
+	// omnibot
+	//TODO Bot_Event_VoiceMacro( other, ent, mode, id );
+	// end omnibot
 
 	te = G_TempEntity(vec3_origin, EV_VOICECMD_SOUND);
 	te->s.groundEntityNum = ent->s.number;

@@ -176,4 +176,13 @@ XCVAR_DEF( sv_fps,						"40",			NULL,				CVAR_ARCHIVE|CVAR_SERVERINFO,					qtrue
 XCVAR_DEF( sv_maxclients,				"8",			NULL,				CVAR_SERVERINFO|CVAR_LATCH|CVAR_ARCHIVE,		qfalse )
 XCVAR_DEF( timelimit,					"0",			NULL,				CVAR_SERVERINFO|CVAR_ARCHIVE|CVAR_NORESTART,	qtrue )
 
+
+// omnibot
+XCVAR_DEF( omnibot_path,				"",				NULL,				CVAR_ARCHIVE|CVAR_NORESTART,					qfalse )
+XCVAR_DEF( omnibot_enable,				"1",			NULL,				CVAR_ARCHIVE|CVAR_SERVERINFO|CVAR_NORESTART,	qfalse )
+XCVAR_DEF( omnibot_playing,				"0",			NULL,				CVAR_SERVERINFO|CVAR_ROM,						qfalse )
+XCVAR_DEF( omnibot_flags,				"0",			NULL,				CVAR_ARCHIVE|CVAR_NORESTART,					qfalse )
+XCVAR_DEF( omnibot_library,				"omnibot_ja",	NULL,				CVAR_ROM,										qfalse )
+// end omnibot
+
 #undef XCVAR_DEF

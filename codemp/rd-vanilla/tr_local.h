@@ -1243,6 +1243,7 @@ Ghoul2 Insert End
 void R_SwapBuffers( int );
 
 void R_RenderView( viewParms_t *parms );
+void R_RenderOmnibot();
 
 void R_AddMD3Surfaces( trRefEntity_t *e );
 void R_AddNullModelSurfaces( trRefEntity_t *e );
@@ -1810,7 +1811,8 @@ typedef enum {
 	RC_SWAP_BUFFERS,
 	RC_WORLD_EFFECTS,
 	RC_AUTO_MAP,
-	RC_VIDEOFRAME
+	RC_VIDEOFRAME,
+	RC_DRAW_OMNIBOT
 } renderCommand_t;
 
 

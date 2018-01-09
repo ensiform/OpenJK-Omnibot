@@ -1992,6 +1992,9 @@ void RB_ExecuteRenderCommands( const void *data ) {
 		case RC_AUTO_MAP:
 			data = R_DrawWireframeAutomap(data);
 			break;
+		case RC_DRAW_OMNIBOT:
+			data = ri.Sys_OmnibotRender( data );
+			break;
 		case RC_END_OF_LIST:
 		default:
 			// stop rendering
